@@ -7,8 +7,8 @@ public interface IntList {
 
     int set(int index, int item);
 
-//    int remove(int item);
-//
+    //    int remove(int item);
+
     int remove(int index);
 
     boolean contains(int item);

@@ -4,13 +4,13 @@ public class Main {
 
     public static void main(String[] args) {
 
-            int[] arr;
+        int[] arr;
 
-            arr = new int[100_000];
-            for (int i = 0; i < arr.length; i++) {
-                arr[i] = ((int) (Math.random() * 200_000));
-                System.out.println(arr[i]);
-            }
+        arr = new int[100_000];
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] = ((int) (Math.random() * 200_000));
+            System.out.println(arr[i]);
+        }
 
 //            sortSelection(arr);
 //        System.out.println(arr);
@@ -72,7 +72,5 @@ public class Main {
             arr[j] = temp;
         }
     }
-
-
 
 }

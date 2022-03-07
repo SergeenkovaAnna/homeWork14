@@ -2,8 +2,7 @@ package ru.skypro;
 
 import java.util.Arrays;
 
-public class IntListImpl implements IntList {
-
+public class IntListImpl implements IntList{
     private static final int DEFAULT_CAPACITY = 5;
     private int[] array;
     private int sizeArray;
@@ -133,7 +132,7 @@ public class IntListImpl implements IntList {
 
     @Override
     public int[] toArray() {
-       return Arrays.copyOf(array, array.length);
+        return Arrays.copyOf(array, array.length);
     }
 
     private void theMostFastSort() {
