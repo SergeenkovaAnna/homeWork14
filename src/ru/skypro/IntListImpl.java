@@ -2,7 +2,7 @@ package ru.skypro;
 
 import java.util.Arrays;
 
-public class IntListImpl implements IntList{
+public class IntListImpl implements IntList {
     private static final int DEFAULT_CAPACITY = 5;
     private int[] array;
     private int sizeArray;
@@ -19,7 +19,7 @@ public class IntListImpl implements IntList{
     @Override
     public int add(int item) {
         checkForZero(item);
-        checkCapacity();
+        grow();
         array[sizeArray++] = item;
         return item;
     }
@@ -27,7 +27,7 @@ public class IntListImpl implements IntList{
     @Override
     public int add(int index, int item) {
         checkForZero(item);
-        checkCapacity();
+        grow();
         int newArray[] = new int[sizeArray++];
         for (int i = 0; i < index + 1; i++) {
             if (i < index - 1) {
@@ -52,7 +52,7 @@ public class IntListImpl implements IntList{
     @Override
     public int remove(int index, int item) {
         checkForZero(item);
-        int newArray[] = new int[array.length -1];
+        int newArray[] = new int[array.length - 1];
         for (int i = 0, j = 0; i < array.length; i++) {
             if (i == index) {
                 continue;
@@ -82,7 +82,7 @@ public class IntListImpl implements IntList{
     @Override
     public int lastIndexOf(int item) {
         checkForZero(item);
-        for (int i = sizeArray -1; i >= 0; i--) {
+        for (int i = sizeArray - 1; i >= 0; i--) {
             if (item == (array[i])) {
                 return i;
             }
@@ -145,6 +145,16 @@ public class IntListImpl implements IntList{
         }
     }
 
+    private void bibbleSortRecursiveMethod(int[] array) {
+        for (int i = 0; i < array.length - 1; i++) {
+            if (array[i] > array[i + 1]) {
+               int temp = array[i];
+                array[i] = array[i + 1];
+                array[i + 1] = temp;
+            }
+        }
+    }
+
     private boolean binarySearch(int[] array, int item) {
         int min = 0;
         int max = array.length - 1;
@@ -165,6 +175,10 @@ public class IntListImpl implements IntList{
         return false;
     }
 
+    private void grow() {
+        checkCapacity();
+    }
+
     private void checkForZero(int item) {
         if (item == 0) {
             throw new IllegalArgumentException("used null value");
@@ -173,7 +187,7 @@ public class IntListImpl implements IntList{
 
     private void checkCapacity() {
         if (sizeArray == array.length) {
-            array = Arrays.copyOf(array, sizeArray * 2);
+            array = Arrays.copyOf(array, sizeArray * 3 / 2);
         }
     }
 
