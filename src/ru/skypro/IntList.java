@@ -9,7 +9,7 @@ public interface IntList {
 
     //    int remove(int item);
 
-    int remove(int index);
+    int remove(int index, int item);
 
     boolean contains(int item);
 

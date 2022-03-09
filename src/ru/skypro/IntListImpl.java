@@ -15,10 +15,6 @@ public class IntListImpl implements IntList{
         this.array = new int[capacity];
     }
 
-    int item;
-    int index;
-    int i;
-    int j;
 
     @Override
     public int add(int item) {
@@ -33,7 +29,7 @@ public class IntListImpl implements IntList{
         checkForZero(item);
         checkCapacity();
         int newArray[] = new int[sizeArray++];
-        for (i = 0; i < index + 1; i++) {
+        for (int i = 0; i < index + 1; i++) {
             if (i < index - 1) {
                 newArray[i] = array[i];
             } else if (i == index - 1) {
@@ -42,6 +38,7 @@ public class IntListImpl implements IntList{
                 newArray[i] = array[i - 1];
             }
         }
+        array = newArray;
         return item;
     }
 
@@ -53,10 +50,10 @@ public class IntListImpl implements IntList{
     }
 
     @Override
-    public int remove(int index) {
+    public int remove(int index, int item) {
         checkForZero(item);
         int newArray[] = new int[array.length -1];
-        for (i = 0, j = 0; i < array.length; i++) {
+        for (int i = 0, j = 0; i < array.length; i++) {
             if (i == index) {
                 continue;
             }
@@ -69,14 +66,13 @@ public class IntListImpl implements IntList{
     public boolean contains(int item) {
         checkForZero(item);
         return indexOf(item) >= 0;
-        return true;
     }
 
     @Override
     public int indexOf(int item) {
         checkForZero(item);
         for (int i = 0; i < sizeArray; i++) {
-            if (item.equals(array[i])) {
+            if (item == (array[i])) {
                 return i;
             }
         }
@@ -87,7 +83,7 @@ public class IntListImpl implements IntList{
     public int lastIndexOf(int item) {
         checkForZero(item);
         for (int i = sizeArray -1; i >= 0; i--) {
-            if (item.equals(array[i])) {
+            if (item == (array[i])) {
                 return i;
             }
         }
@@ -96,6 +92,7 @@ public class IntListImpl implements IntList{
 
     @Override
     public int get(int index) {
+        checkIndex(index);
         return array[index];
     }
 
@@ -117,22 +114,23 @@ public class IntListImpl implements IntList{
 
     @Override
     public int size() {
-        return sizeArray == 0;
+        return sizeArray = 0;
     }
 
     @Override
     public boolean isEmpty() {
+        checkCapacity();
         return false;
     }
 
     @Override
     public void clear() {
-        array = new int[DEFAULT_CAPACITY];
+        array = new int[0];
     }
 
     @Override
     public int[] toArray() {
-        return Arrays.copyOf(array, array.length);
+        return Arrays.copyOf(array, sizeArray);
     }
 
     private void theMostFastSort() {
@@ -179,4 +177,12 @@ public class IntListImpl implements IntList{
         }
     }
 
+    private void checkIndex(int index) {
+        if (index < 0 || index > array.length) {
+            throw new IllegalArgumentException("used invalid value");
+        }
+        if (index > array.length) {
+            throw new IndexOutOfBoundsException("used invalid value");
+        }
+    }
 }
